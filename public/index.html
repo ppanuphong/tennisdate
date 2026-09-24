@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>หาคู่ตีแบด</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="court">
+    <div class="wrap">
+      <div class="brand">
+        <div>
+          <h1>หาคู่<span>ตีแบด</span></h1>
+          <p>ก๊วนไหนขาดคน ลงประกาศไว้ ใครว่างก็กดเข้าร่วมได้เลย</p>
+        </div>
+        <button class="btn btn-shuttle" id="openCreate" type="button">+ ตั้งก๊วน</button>
+      </div>
+      <div class="me">
+        <label for="nick">ชื่อเล่นของคุณ</label>
+        <input id="nick" maxlength="30" placeholder="เช่น ต้น, พี่หมู" autocomplete="nickname">
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="panel" id="createPanel" hidden aria-labelledby="createTitle">
+      <h2 id="createTitle">ตั้งก๊วนใหม่</h2>
+      <form class="form" id="createForm" novalidate>
+        <div class="field wide"><label for="f-venue">สนาม</label><input id="f-venue" maxlength="80" placeholder="เช่น สนามแบด ส.วิชัย" required></div>
+        <div class="field"><label for="f-area">ย่าน / เขต</label><input id="f-area" maxlength="60" placeholder="เช่น ลาดพร้าว"></div>
+        <div class="field"><label for="f-date">วันที่</label><input id="f-date" type="date" required></div>
+        <div class="field"><label for="f-start">เริ่ม</label><input id="f-start" type="time" value="19:00" required></div>
+        <div class="field"><label for="f-end">เลิก</label><input id="f-end" type="time" value="21:00" required></div>
+        <div class="field"><label for="f-slots">ต้องการเพิ่มอีก (คน)</label><input id="f-slots" type="number" min="1" max="30" value="2" required></div>
+        <div class="field"><label for="f-courts">จำนวนคอร์ท</label><input id="f-courts" type="number" min="1" max="20" value="1"></div>
+        <div class="field"><label for="f-price">ค่าคอร์ทต่อคน (บาท)</label><input id="f-price" type="number" min="0" max="5000" placeholder="เช่น 120"></div>
+        <div class="field"><label for="f-shuttle">ค่าลูก</label><input id="f-shuttle" maxlength="80" placeholder="เช่น ลูกละ 90 หารตามเกม"></div>
+        <div class="field wide">
+          <label id="lv-label">ระดับมือที่รับ</label>
+          <div class="levels-pick" id="f-levels" role="group" aria-labelledby="lv-label"></div>
+          <div class="legend" id="legend"></div>
+        </div>
+        <div class="field"><label for="f-host">ชื่อคนตั้งก๊วน</label><input id="f-host" maxlength="30" placeholder="ชื่อเล่นของคุณ" required></div>
+        <div class="field"><label for="f-contact">ติดต่อ (LINE ID / เบอร์)</label><input id="f-contact" maxlength="60" placeholder="เช่น @tonbad"></div>
+        <div class="field wide"><label for="f-note">รายละเอียดเพิ่มเติม</label><textarea id="f-note" maxlength="400" placeholder="เช่น ตีคู่ผสม หมุนเวียนทุกเกม มีที่จอดรถ"></textarea></div>
+        <div class="field wide">
+          <div class="err" id="formErr" role="alert"></div>
+          <div class="actions">
+            <button class="btn btn-court" type="submit" id="submitBtn">ลงประกาศ</button>
+            <button class="btn btn-ghost" type="button" id="cancelCreate">ยกเลิก</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section class="toolbar" aria-label="ตัวกรอง">
+      <div class="chips" id="dateChips"><span class="lab">วัน</span></div>
+      <div class="chips" id="levelChips"><span class="lab">ระดับ</span></div>
+      <div class="search">
+        <input type="search" id="q" placeholder="ค้นหาสนามหรือย่าน">
+        <label class="toggle"><input type="checkbox" id="openOnly"> เฉพาะก๊วนที่ยังขาดคน</label>
+      </div>
+    </section>
+    <div id="status"></div>
+    <main id="list" aria-live="polite"></main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

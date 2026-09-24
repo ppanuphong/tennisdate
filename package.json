@@ -1,0 +1,9 @@
+{
+  "name": "badminton-finder",
+  "version": "1.0.0",
+  "description": "เว็บหาคู่ตีแบด รันบนเครื่องตัวเอง",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  }
+}
